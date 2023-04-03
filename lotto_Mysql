@@ -1,0 +1,48 @@
+import requests
+from mysql import connector
+HOST = '3.35.138.95'
+USER = 'jhy'
+PW = '1234'
+DATABASE='mydb'
+
+PORT = '55997'
+
+num_list=[]
+# db 연결하기
+def conn_db(host, port, user, pw, database):
+  conn = connector.connect(host=host, user=user, password=pw, port=port, database=database)
+  return conn
+connection_result = conn_db(host=HOST, port=PORT, user=USER, pw=PW, database=DATABASE)
+cursor = connection_result.cursor()
+sql = 'select * from lotto_number;'
+cursor.execute(sql)
+rows = cursor.fetchall()
+
+def insert_data(roundNum, num1, num2, num3, num4, num5, num6, bonus):
+    sql = f"INSERT into lotto_number (round_num, num1,num2, num3,num4, num5, num6, b_num) values({roundNum}, {num1}, {num2}, {num3}, {num4}, {num5}, {num6}, {bonus});"
+    # db연결
+    connection_result = conn_db(host=HOST, port=PORT, user=USER, pw=PW, database=DATABASE)
+    cursor = connection_result.cursor()
+    # query문 실행
+    cursor.execute(sql)
+    connection_result.commit()
+    # db연결해제
+    connection_result.close()
+    print(f"{i}잘 저장되었습니다")
+    return
+
+def Get_round_num(num):
+        global num_list
+        num = num #가져오고 싶은 회차
+        url = f'http://www.dhlottery.co.kr/common.do?method=getLottoNumber&drwNo={num}'
+        response = requests.get(url)
+        output = response.json()
+        
+        num_list = [output.get(f'drwtNo{i}') for i in range(1, 7)]#당첨번호들을 받아옴
+        bnus_num = output.get('bnusNo')#보너스넘버를 받아옴
+        num_list.append(bnus_num)#해당회차의 넘버를 리스트로 저장
+        
+for i in range(1,1062):
+  num_list=[]
+  Get_round_num(i)
+  insert_data(i,*num_list)
