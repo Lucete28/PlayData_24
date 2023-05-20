@@ -37,14 +37,14 @@ def input():
         df = pd.DataFrame(data=data, columns=["카테고리","타겟", "태그"])
         try:
             # 파일 불러오기
-            existing_df = pd.read_excel('test1.xlsx')
+            existing_df = pd.read_csv('test1.xlsx')
             # 이어쓰기 데이터 추가
             updated_df = pd.concat([existing_df, df], ignore_index=True)
             # 파일 저장
-            updated_df.to_excel('test1.xlsx', index=False)
+            updated_df.to_csv('test1.xlsx', index=False)
             st.write('완료')    
         except:
-            df.to_excel('test1.xlsx', index=False)
+            df.to_csv('test1.xlsx', index=False)
             st.write('완료') 
     if st.button("메인페이지로..."):
         st.session_state["current_page"] = "main_page"
