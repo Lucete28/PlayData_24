@@ -2,8 +2,8 @@ import streamlit as st
 import os
 import pandas as pd
 
-main_folder_PATH = 'C:/PlayData/day_38/stramlit_Test'
-main_folder = os.listdir(main_folder_PATH)
+# main_folder_PATH = 'C:/PlayData/day_38/stramlit_Test'
+# main_folder = os.listdir(main_folder_PATH)
 
 category = ['','linux', 'python']
 
