@@ -42,6 +42,7 @@ def input():
             updated_df = pd.concat([existing_df, df], ignore_index=True)
             # 파일 저장
             updated_df.to_csv('test1.csv', index=False)
+            uploaded_file = st.file_uploader("test1", type=["csv", "txt"])
             st.write('완료')    
         except:
             df.to_csv('test1.csv', index=False)
