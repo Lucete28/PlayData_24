@@ -98,6 +98,12 @@ def README():
     st.write('좌측 sidebar에서 입력 또는 검색을 눌러 사용해주세요')
     st.write('추가로 원하는 카테고리등은 직접 문의해주세요')
     st.write('Email : 2580jhy28@gmail.com')
+    st.write('')
+    if folder_state:
+        if file_state:
+            st.write('파일이 정상 생성되었습니다')
+        else:
+            st.write('파일을 생성하지 못했습니다.')
 
         
     
@@ -111,9 +117,10 @@ if __name__ == "__main__":
     # 폴더 생성
     try:
         os.mkdir(folder_path)
-        st.success(f"폴더 '{folder_path}'가 생성되었습니다.")
+        folder_state = True
     except FileExistsError:
-        st.warning(f"폴더 '{folder_path}'는 이미 존재합니다.")
+        folder_state = True
+
 
 import os
 
@@ -125,10 +132,11 @@ if not os.path.isfile(file_path):
         # 데이터프레임을 파일에 저장
         df.to_csv(file_path, index=False)
 
-        st.success(f"파일 '{file_path}'가 생성되었습니다.")
+        file_state = True
     except Exception as e:
-        st.error(f"파일 생성 중 오류가 발생했습니다: {str(e)}")
+        file_state = False
 else:
-    st.warning(f"파일 '{file_path}'은 이미 존재합니다. 새로운 파일을 생성하지 않았습니다.")
+        file_state = True
+
     
-    main()
+main()
