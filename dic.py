@@ -74,18 +74,30 @@ def main():
     elif st.session_state.current_page == 'input':
         input()
     elif st.session_state.current_page == 'search':
-        search()        
+        search()   
+    elif st.session_state.current_page == 'README':
+        README()      
         
 def main_page():
     st.sidebar.title("Sidebar")
-    sidebar_options = ["입력", "검색"]
+    sidebar_options = ["README","입력", "검색"]
     selected_option = st.sidebar.radio("옵션 선택", sidebar_options)
     
     if selected_option == "입력":
         input()
     elif selected_option == "검색":
         search()
+    elif selected_option == "README":
+        README()
 
+def README():
+    st.title('Custom Dictionary')
+    st.write('사용자가 직접 내용을 작성할 수 있는 사전입니다')
+    st.write('개발중에 있으며 모바일환경에서는 작동하지 않을 수 있습니다.')
+    st.write('앱 사용시 파일이 자동생성되며 삭제시 제대로 기능하지 않을 수 있습니다.')
+    st.write('좌측 sidebar에서 입력 또는 검색을 눌러 사용해주세요')
+    st.write('추가로 원하는 카테고리등은 직접 문의해주세요')
+    st.write('Email : 2580jhy28@gmail.com')
 
         
     
