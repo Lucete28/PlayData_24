@@ -37,14 +37,14 @@ def input():
         df = pd.DataFrame(data=data, columns=["카테고리","타겟", "태그"])
         try:
             # 파일 불러오기
-            existing_df = pd.read_csv('test1.xlsx')
+            existing_df = pd.read_csv('test1.csv')
             # 이어쓰기 데이터 추가
             updated_df = pd.concat([existing_df, df], ignore_index=True)
             # 파일 저장
-            updated_df.to_csv('test1.xlsx', index=False)
+            updated_df.to_csv('test1.csv', index=False)
             st.write('완료')    
         except:
-            df.to_csv('test1.xlsx', index=False)
+            df.to_csv('test1.csv', index=False)
             st.write('완료') 
     if st.button("메인페이지로..."):
         st.session_state["current_page"] = "main_page"
@@ -55,7 +55,7 @@ def serch():
     target = st.text_input("타겟")  
     tag = st.text_area("설명")  
     if st.button('commit'):
-        df = pd.read_excel('C:/PlayData/test1.xlsx')
+        df = pd.read_csv('test1.csv')
         if cat:
             df = df[df['카테고리']==cat]
         if target:
