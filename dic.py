@@ -122,7 +122,6 @@ if __name__ == "__main__":
         folder_state = True
 
 
-import os
 
 # 파일이 이미 존재하는지 확인
 if not os.path.isfile(file_path):
